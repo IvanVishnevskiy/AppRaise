@@ -1,0 +1,58 @@
+.main {
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+}
+
+.main.show {
+  pointer-events: all;
+  display: block;
+}
+
+.main.show .background {
+  pointer-events: all;
+}
+
+.list {
+  background-color:#eee;
+  color: #000;
+  display: inline-block;
+  list-style: none;
+  border-radius: 2px;
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  text-align: center;
+  box-shadow: 7px 7px 20px 0px rgba(0,0,0,1);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.list li:first-child {
+  border-top: none;
+}
+
+.list li {
+  padding: 2px 14px;
+  width: 100%;
+  border-top: solid 1px #ccc;
+}
+
+.list li:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.background {
+  background-color: #000;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+}
