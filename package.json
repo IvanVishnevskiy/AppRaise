@@ -1,0 +1,20 @@
+{
+  "name": "AppRaise",
+  "version": "1.0.0",
+  "description": "Test assessment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanVishnevskiy/AppRaise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IvanVishnevskiy/AppRaise/issues"
+  },
+  "homepage": "https://github.com/IvanVishnevskiy/AppRaise#readme"
+}
