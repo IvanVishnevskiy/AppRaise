@@ -13,10 +13,6 @@
   display: block;
 }
 
-.main.show .background {
-  pointer-events: all;
-}
-
 .list {
   background-color:#eee;
   color: #000;
@@ -48,11 +44,13 @@
 }
 
 .background {
-  background-color: #000;
   left: 0;
   top: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
   pointer-events: none;
+}
+.main.show .background {
+  pointer-events: all;
 }

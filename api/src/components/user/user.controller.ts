@@ -37,7 +37,7 @@ export class UserController {
   @Post('removeuser')
   async removeUser(@Body() dto: { userId: string }): Promise<{}> {
     const status: Array<UserEntity> = await this.userService.remove(dto.userId);
-    return status ? { success: true } : { error: 'No parent found'};
+    return status || { error: 'No parent found'};
   }
   
 }

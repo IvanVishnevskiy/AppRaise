@@ -6,7 +6,7 @@ export class IUser {
 
 export class AddUserDto {
     name: string
-    parentId: string
+    parentId?: string
 }
 
 export class SetParentDto {

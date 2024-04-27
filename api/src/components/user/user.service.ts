@@ -13,7 +13,7 @@ export class UserService {
 
   async findAll(): Promise<UserEntity[]> {
     const users = await this.usersRepository.manager.getTreeRepository(UserEntity).findTrees();
-    return users
+    return users;
   }
 
   /**
@@ -25,10 +25,15 @@ export class UserService {
     const parent = await this.usersRepository.findOne({ where: {
         id: user.parentId
     }});
+
     if( user.parentId && !parent ) return false;
     const newUser = new UserEntity();
     newUser.name = user.name;
-    newUser.parent = parent;
+
+    if(user.parentId) {
+      newUser.parent = parent;
+    }
+
     await this.usersRepository.manager.save(newUser);
     return this.findAll();
   }
@@ -47,15 +52,11 @@ export class UserService {
       }});
       if(!parent) return false;
     }
+
     const user = await this.usersRepository.findOne({ where: {
       id: userId
     }});
-    // this returns children count including our user so we substract 1
-    const children = await this.usersRepository.manager.getTreeRepository(UserEntity).countDescendants(user) - 1;
-    // Drop the operation if user has children.
-    // It's possible to move the whole part of the tree elsewhere, but I believe it is outside of the scope of this assessment.
-    // That would require additional clarification in real world scenario, though.
-    if(!user || children > 0) return false;
+
     user.parent = parent;
     await this.usersRepository.manager.save(user);
     return this.findAll();
