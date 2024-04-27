@@ -13,3 +13,30 @@ body {
 html {
   color-scheme: dark;
 }
+
+button {
+  padding: 14px;
+  border-radius: 7px;
+  background: none;
+  border: none;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(195,112,238,1) 87%, rgba(249,116,255,1) 100%);
+  z-index: -1;
+  transition: transform .5s ease;
+}
+
+button:hover::after {
+  transform: translateX(-50%);
+}

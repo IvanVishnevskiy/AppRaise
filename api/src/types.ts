@@ -11,5 +11,5 @@ export class AddUserDto {
 
 export class SetParentDto {
     userId: string
-    parentId: string
+    parentId?: string
 }

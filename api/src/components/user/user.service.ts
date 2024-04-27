@@ -21,7 +21,7 @@ export class UserService {
    * @param user 
    * @returns created user
    */
-  async add(user: Partial<IUser>): Promise<UserEntity | false> {
+  async add(user: Partial<IUser>): Promise<Array<UserEntity> | false> {
     const parent = await this.usersRepository.findOne({ where: {
         id: user.parentId
     }});
@@ -30,7 +30,7 @@ export class UserService {
     newUser.name = user.name;
     newUser.parent = parent;
     await this.usersRepository.manager.save(newUser);
-    return newUser;
+    return this.findAll();
   }
 
   /**
@@ -39,7 +39,7 @@ export class UserService {
    * @param parentId mew parent id
    * @returns parent
    */
-  async setParent(userId: string, parentId?: string): Promise<UserEntity | false> {
+  async setParent(userId: string, parentId?: string): Promise<Array<UserEntity> | false> {
     let parent = null;
     if(parentId) {
       parent = await this.usersRepository.findOne({ where: {
@@ -58,12 +58,12 @@ export class UserService {
     if(!user || children > 0) return false;
     user.parent = parent;
     await this.usersRepository.manager.save(user);
-    return parent
+    return this.findAll();
   }
 
 
-  async remove(id: string): Promise<boolean> {
+  async remove(id: string): Promise<Array<UserEntity>> {
     await this.usersRepository.delete(id);
-    return true;
+    return this.findAll();
   }
 }
