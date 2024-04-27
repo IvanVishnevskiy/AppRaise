@@ -63,7 +63,17 @@ export class UserService {
   }
 
 
-  async remove(id: string): Promise<Array<UserEntity>> {
+  async remove(id: string): Promise<Array<UserEntity> | boolean> {
+    const user = await this.usersRepository.findOne({ where: {
+      id
+    }});
+    // this returns children count including our user so we substract 1
+    const children = await this.usersRepository.manager.getTreeRepository(UserEntity).countDescendants(user) - 1;
+    // Drop the operation if user has children.
+    // It's possible to move the whole part of the tree elsewhere, but I believe it is outside of the scope of this assessment.
+    // That would require additional clarification in real world scenario, though.
+    if(children > 0) return false;
+
     await this.usersRepository.delete(id);
     return this.findAll();
   }
