@@ -53,6 +53,13 @@ export class UserService {
       if(!parent) return false;
     }
 
+    const ancestors = await this.usersRepository.manager.getTreeRepository(UserEntity).findAncestors(parent);
+    
+    // prevent ouroboros
+    if(ancestors.find(user => user.id === userId)) {
+      return false;
+    }
+
     const user = await this.usersRepository.findOne({ where: {
       id: userId
     }});

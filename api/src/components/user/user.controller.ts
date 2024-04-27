@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { AddUserDto, IUser, SetParentDto } from '../../types';
+import { AddUserDto, SetParentDto } from '../../types';
 import { UserService } from './user.service';
 import { UserEntity } from 'src/entities/user.entity';
 
@@ -25,7 +25,7 @@ export class UserController {
     const status: Array<UserEntity> | false = await this.userService.setParent(userId, parentId);
     // this error handling is not great but it will do for the assessment sake. Ideally we should have constants with output message
     // and setParent() should return such constant depending on what went wrong.
-    return status || { error: 'Couldn\'t find employee or boss using provided id, or this user has subordinates'};
+    return status || { error: 'Invalid operation'};
   }
 
   @Post('adduser')
